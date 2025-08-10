@@ -42,6 +42,14 @@ git clone https://github.com/hitblast/rust-cli-template.git
 cd rust-cli-template && cargo check
 ```
 
+### Default name
+
+You may change these names to suit your own project's needs.
+
+- Project: `crust-cli`
+- Project (imports): `crust_cli`
+- Executable: `crustcli`
+
 ### Manpage generation
 
 This CLI template also comes with preincluded manpage generation. The output directory is `man/man1`.
