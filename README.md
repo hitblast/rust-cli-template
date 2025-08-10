@@ -42,7 +42,7 @@ git clone https://github.com/hitblast/rust-cli-template.git
 cd rust-cli-template && cargo check
 ```
 
-### Default name
+### Default names
 
 You may change these names to suit your own project's needs.
 
