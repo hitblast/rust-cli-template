@@ -1,0 +1,18 @@
+[package]
+name = "crust-cli"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+tokio = { version = "1", features = ["full"] }
+clap = { version = "4", features = ["derive"] }
+clap_complete = "4.5.55"
+self_update = { version = "0.42.0", features = ["compression-zip-deflate"] }
+anyhow = "1.0.98"
+anstyle = "1.0.11"
+async-trait = "0.1.88"
+nix = { version = "0.30.1", features = ["user"] }
+dialoguer = "0.11.0"
+
+[workspace]
+members = [".", "xtask"]
