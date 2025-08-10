@@ -42,6 +42,14 @@ git clone https://github.com/hitblast/rust-cli-template.git
 cd rust-cli-template && cargo check
 ```
 
+### Manpage generation
+
+This CLI template also comes with preincluded manpage generation. The output directory is `man/man1`.
+
+```bash
+cargo xtask manpage
+```
+
 ## Contributing
 
 Since it is a template repository, it does not have an explicit contribution guideline. But, if you have any ideas for what an ideal CLI should contain (written in Rust, obviously), then you're free to add to this project via a [pull request](https://github.blog/developer-skills/github/beginners-guide-to-github-creating-a-pull-request/)!
