@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-anyhow = "1.0.98"
-clap = "4.5.43"
-clap_mangen = "0.2.29"
+anyhow = "1.0.100"
+clap = "4.5.53"
+clap_mangen = "0.2.31"
 template = { path = "../" }
