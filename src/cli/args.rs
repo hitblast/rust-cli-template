@@ -4,7 +4,7 @@ use super::get_styles;
 use clap::{Parser, Subcommand};
 
 #[derive(Parser)]
-#[command(name = "crustcli", styles = get_styles(), version, about)]
+#[command(name = "template", styles = get_styles(), version, about)]
 pub struct Args {
     /// Increase output verbosity.
     #[arg(short, long, global = true)]

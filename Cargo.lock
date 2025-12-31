@@ -208,20 +208,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "crust-cli"
-version = "0.1.0"
-dependencies = [
- "anstyle",
- "anyhow",
- "async-trait",
- "clap",
- "clap_complete",
- "dialoguer",
- "nix",
- "tokio",
-]
-
-[[package]]
 name = "dialoguer"
 version = "0.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -539,6 +525,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "template"
+version = "0.1.0"
+dependencies = [
+ "anstyle",
+ "anyhow",
+ "async-trait",
+ "clap",
+ "clap_complete",
+ "dialoguer",
+ "nix",
+ "tokio",
+]
+
+[[package]]
 name = "thiserror"
 version = "1.0.69"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -791,7 +791,7 @@ dependencies = [
  "anyhow",
  "clap",
  "clap_mangen",
- "crust-cli",
+ "template",
 ]
 
 [[package]]

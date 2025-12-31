@@ -14,7 +14,7 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Commands {
-    /// Generate manpage for crustcli
+    /// Generate manpage for template
     Manpage {
         /// Output directory for the manpage
         #[arg(short, long, default_value = "man/man1")]
@@ -39,10 +39,10 @@ fn generate_manpage(dir: PathBuf) -> Result<()> {
     fs::create_dir_all(&dir).context("Failed to create output directory")?;
 
     // Generate the manpage
-    let file_path = dir.join("crust-cli.1");
+    let file_path = dir.join("template.1");
     let mut file = File::create(&file_path).context("Failed to create manpage file")?;
 
-    let cmd = crust_cli::cli::Args::command();
+    let cmd = template::cli::Args::command();
     Man::new(cmd)
         .render(&mut file)
         .context("Failed to render manpage")?;

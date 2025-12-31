@@ -1,5 +1,5 @@
 use clap::Parser;
-use crust_cli::{
+use template::{
     cli::{
         Args,
         args::{Command, HelloSubcmd},
@@ -17,13 +17,12 @@ async fn main() {
     let args = Args::parse();
 
     // sudo protection
-    // can be used for blocking certain commands from being used with/without sudo
     let result = match &args.command {
         // Command::SelfUpdate(_) => run_with_root(),
         _ => run_with_noroot(),
     };
 
-    // set global flags' values
+    // set global flags
     set_accept_all(args.accept_all);
     set_quiet(args.quiet);
     set_verbose(args.verbose);

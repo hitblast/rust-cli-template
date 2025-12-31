@@ -1,6 +1,6 @@
 [package]
-name = "crust-cli"
-description = "A Rust-based template repository for building CLIs."
+name = "template"
+description = "descriptionhere"
 version = "0.1.0"
 edition = "2024"
 

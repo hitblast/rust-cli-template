@@ -1,6 +1,5 @@
 use anstyle::{AnsiColor, Color::Ansi, Style};
 
-/// Style attributes for template CLI.
 pub fn get_styles() -> clap::builder::Styles {
     clap::builder::Styles::styled()
         .usage(
