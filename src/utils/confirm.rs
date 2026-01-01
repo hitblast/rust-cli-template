@@ -1,17 +1,11 @@
 use dialoguer::Confirm;
 
-use crate::{
-    cli::atomic::should_accept_all,
-    utils::logger::{LogLevel, print_log},
-};
+use crate::{cli::atomic::should_accept_all, log_prompt};
 
 /// Ask "Y/N?"; returns true if accept_all is set or the user types "y" or "Y"
 pub fn confirm_action(prompt: &str) -> bool {
     if should_accept_all() {
-        print_log(
-            LogLevel::Prompt,
-            &format!("{prompt} [y/N]: y (auto-accepted)"),
-        );
+        log_prompt!("{prompt} [y/N]: (auto-accepted)");
 
         return true;
     }

@@ -6,10 +6,8 @@ use template::{
         atomic::{set_accept_all, set_dry_run, set_quiet, set_verbose},
     },
     commands::Runnable,
-    utils::{
-        logger::{LogLevel, print_log},
-        sudo::run_with_noroot,
-    },
+    log_err,
+    utils::sudo::run_with_noroot,
 };
 
 #[tokio::main(flavor = "multi_thread")]
@@ -29,7 +27,7 @@ async fn main() {
     set_dry_run(args.dry_run);
 
     if let Err(err) = result {
-        print_log(LogLevel::Error, &format!("Invoke failure: {err}"));
+        log_err!("Invoke failure: {err}");
         std::process::exit(1);
     }
 
@@ -42,7 +40,7 @@ async fn main() {
     };
 
     if let Err(err) = result {
-        print_log(LogLevel::Error, &err.to_string());
+        log_err!("{err}");
         std::process::exit(1);
     }
 }

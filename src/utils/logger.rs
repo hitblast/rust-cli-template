@@ -1,56 +1,85 @@
 use crate::cli::atomic::{should_be_quiet, should_be_verbose};
 
-/// ANSI color codes
-pub const RED: &str = "\x1b[31m";
-pub const GREEN: &str = "\x1b[32m";
-pub const YELLOW: &str = "\x1b[33m";
-pub const PINK: &str = "\x1b[35m";
-pub const ORANGE: &str = "\x1b[38;5;208m";
-pub const CYAN: &str = "\x1b[36m";
-pub const RESET: &str = "\x1b[0m";
-pub const BOLD: &str = "\x1b[1m";
+const RED: &str = "\x1b[31m";
+const YELLOW: &str = "\x1b[33m";
+const PINK: &str = "\x1b[35m";
+const CYAN: &str = "\x1b[36m";
+const RESET: &str = "\x1b[0m";
 
-/// Log level determiner struct for print_log().
 #[derive(PartialEq)]
+#[doc(hidden)]
 pub enum LogLevel {
     Error,
-    Warning,
     Info,
     Prompt,
-    CommandOutput,
     Dry,
-    Fruitful, // 🍎
+    Cute,
 }
 
-/// Central logger.
-pub fn print_log(level: LogLevel, msg: &str) {
-    if should_be_quiet() && level != LogLevel::Error && level != LogLevel::Warning {
+#[doc(hidden)]
+pub fn _print_log(level: LogLevel, msg: &str) {
+    if should_be_quiet() && level != LogLevel::Error {
         return;
     }
 
-    if (level == LogLevel::Info || level == LogLevel::CommandOutput) && !should_be_verbose() {
+    if level == LogLevel::Info && !should_be_verbose() {
         return;
     }
 
     let (tag, color) = match level {
-        LogLevel::Error => ("ERR  ", RED),
-        LogLevel::Warning => ("WARN ", ORANGE),
-        LogLevel::Info => ("INFO ", CYAN),
-        LogLevel::CommandOutput => ("OUT  ", GREEN),
-        LogLevel::Prompt => ("PRMT ", PINK),
-        LogLevel::Dry => ("DRY  ", YELLOW),
-        LogLevel::Fruitful => ("🍎", ""),
+        LogLevel::Error => ("ERR", RED),
+        LogLevel::Info => ("INF", CYAN),
+        LogLevel::Prompt => ("ASK", PINK),
+        LogLevel::Dry => ("DRY", YELLOW),
+        LogLevel::Cute => ("🍎", ""),
     };
 
-    let line = if level == LogLevel::Fruitful {
-        format!("{tag} {msg}")
-    } else {
-        format!("{color}{tag}{RESET} {msg}")
-    };
+    let line = format!("{color}{tag}{RESET} {msg}");
 
-    if level == LogLevel::Error || level == LogLevel::Warning {
+    if level == LogLevel::Error {
         eprintln!("{line}");
     } else {
         println!("{line}");
     }
+}
+
+/// Macros.
+#[macro_export]
+macro_rules! log_err {
+    ($($arg:tt)*) => {{
+        let msg = format!($($arg)*);
+        $crate::utils::logger::_print_log($crate::utils::logger::LogLevel::Error, &msg);
+    }};
+}
+
+#[macro_export]
+macro_rules! log_info {
+    ($($arg:tt)*) => {{
+        let msg = format!($($arg)*);
+        $crate::utils::logger::_print_log($crate::utils::logger::LogLevel::Info, &msg);
+    }};
+}
+
+#[macro_export]
+macro_rules! log_prompt {
+    ($($arg:tt)*) => {{
+        let msg = format!($($arg)*);
+        $crate::utils::logger::_print_log($crate::utils::logger::LogLevel::Prompt, &msg);
+    }};
+}
+
+#[macro_export]
+macro_rules! log_dry {
+    ($($arg:tt)*) => {{
+        let msg = format!($($arg)*);
+        $crate::utils::logger::_print_log($crate::utils::logger::LogLevel::Dry, &msg);
+    }};
+}
+
+#[macro_export]
+macro_rules! log_cute {
+    ($($arg:tt)*) => {{
+        let msg = format!($($arg)*);
+        $crate::utils::logger::_print_log($crate::utils::logger::LogLevel::Cute, &msg);
+    }};
 }
