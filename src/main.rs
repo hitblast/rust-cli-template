@@ -15,10 +15,7 @@ async fn main() {
     let args = Args::parse();
 
     // sudo protection
-    let result = match &args.command {
-        // Command::SelfUpdate(_) => run_with_root(),
-        _ => run_with_noroot(),
-    };
+    let result = run_with_noroot();
 
     // set global flags
     set_accept_all(args.accept_all);
