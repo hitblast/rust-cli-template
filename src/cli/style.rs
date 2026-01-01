@@ -1,5 +1,6 @@
 use anstyle::{AnsiColor, Color::Ansi, Style};
 
+#[must_use] 
 pub fn get_styles() -> clap::builder::Styles {
     clap::builder::Styles::styled()
         .usage(
